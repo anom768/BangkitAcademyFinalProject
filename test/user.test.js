@@ -3,6 +3,7 @@ import {web} from "../src/application/web.js";
 import {logger} from "../src/application/logging.js";
 import {createTestUser, getTestUser, removeTestUser} from "./test-util.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 describe('POST /api/users', function () {
 
@@ -138,6 +139,15 @@ describe('POST /api/users/login', function () {
     });
 });
 
+const SECRET_KEY = process.env.SECRET_KEY || 'default_secret_key';
+const mockUser = {
+    username: 'test',
+    name: 'Test User'
+};
+
+// Generate token JWT untuk pengguna
+const token = jwt.sign({ username: mockUser.username }, SECRET_KEY, { expiresIn: '1h' });
+
 describe('GET /api/users/current', function () {
     beforeEach(async () => {
         await createTestUser();
@@ -150,7 +160,7 @@ describe('GET /api/users/current', function () {
     it('should can get current user', async () => {
         const result = await supertest(web)
             .get('/api/users/current')
-            .set('Authorization', 'test');
+            .set('Authorization', `Bearer ${token}`);
 
         expect(result.status).toBe(200);
         expect(result.body.data.username).toBe('test');
@@ -179,7 +189,7 @@ describe('PATCH /api/users/current', function () {
     it('should can update user', async () => {
         const result = await supertest(web)
             .patch("/api/users/current")
-            .set("Authorization", "test")
+            .set("Authorization", `Bearer ${token}`)
             .send({
                 name: "Eko",
                 password: "rahasialagi"
@@ -196,7 +206,7 @@ describe('PATCH /api/users/current', function () {
     it('should can update user name', async () => {
         const result = await supertest(web)
             .patch("/api/users/current")
-            .set("Authorization", "test")
+            .set("Authorization", `Bearer ${token}`)
             .send({
                 name: "Eko"
             });
@@ -209,7 +219,7 @@ describe('PATCH /api/users/current', function () {
     it('should can update user password', async () => {
         const result = await supertest(web)
             .patch("/api/users/current")
-            .set("Authorization", "test")
+            .set("Authorization", `Bearer ${token}`)
             .send({
                 password: "rahasialagi"
             });
@@ -244,7 +254,7 @@ describe('DELETE /api/users/logout', function () {
     it('should can logout', async () => {
         const result = await supertest(web)
             .delete('/api/users/logout')
-            .set('Authorization', 'test');
+            .set('Authorization', `Bearer ${token}`);
 
         expect(result.status).toBe(200);
         expect(result.body.data).toBe("OK");
