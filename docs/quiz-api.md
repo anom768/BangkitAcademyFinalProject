@@ -13,6 +13,10 @@ Request Body :
 {
   "image" : "File image name",
   "audio" : "File audio name",
+  "a" : "a",
+  "b": "b",
+  "c" : "c",
+  "d" : "d",
   "answer" : "answer"
 }
 ```
@@ -24,7 +28,11 @@ Response Body Success :
   "data" : {
     "id" : 1,
     "image" : "File image name",
-    "audio" : "File audio name"
+    "audio" : "File audio name",
+    "a" : "a",
+    "b" : "b",
+    "c" : "c",
+    "d" : "d"
   }
 }
 ```
@@ -50,6 +58,10 @@ Request Body :
 {
   "image" : "File image name",
   "audio" : "File audio name",
+  "a" : "a",
+  "b" : "b",
+  "c" : "c",
+  "d" : "d",
   "answer" : "answer"
 }
 ```
@@ -61,7 +73,11 @@ Response Body Success :
   "data" : {
     "id" : 1,
     "image" : "File image name",
-    "audio" : "File audio name"
+    "audio" : "File audio name",
+    "a" : "a",
+    "b" : "b",
+    "c" : "c",
+    "d" : "d"
   }
 }
 ```
@@ -89,12 +105,20 @@ Response Body Success :
     {
       "id" : 1,
       "image" : "File image name",
-      "audio" : "File audio name"
+      "audio" : "File audio name",
+      "a" : "a",
+      "b" : "b",
+      "c" : "c",
+      "d" : "d"
     },
     {
       "id" : 2,
       "image" : "File image name",
-      "audio" : "File audio name"
+      "audio" : "File audio name",
+      "a" : "a",
+      "b" : "b",
+      "c" : "c",
+      "d" : "d"
     }
   ]
 }
@@ -142,8 +166,16 @@ Request Body :
 
 ```json
 {
-  "id" : 1,
-  "answer" : "answer"
+  "data" : [
+    {
+      "id" : 1,
+      "answer" : "answer"
+    },
+    {
+      "id" : 2,
+      "answer" : "answer"
+    }
+  ]
 }
 ```
 
@@ -151,7 +183,9 @@ Response Body Success :
 
 ```json
 {
-  "data" : "OK"
+  "data" : {
+    "score" : 100
+  }
 }
 ```
 

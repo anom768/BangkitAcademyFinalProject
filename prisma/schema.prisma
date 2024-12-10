@@ -27,6 +27,10 @@ model Quiz {
   id     Int    @id @default(autoincrement())
   image  String @db.VarChar(100)
   audio  String @db.VarChar(100)
+  a      String @db.VarChar(100)
+  b      String @db.VarChar(100)
+  c      String @db.VarChar(100)
+  d      String @db.VarChar(100)
   answer String @db.VarChar(100)
 
   @@map("quiz")
