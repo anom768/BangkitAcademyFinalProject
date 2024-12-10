@@ -4,6 +4,7 @@
   "description": "Bangkit Academy 2024 Batch 2 Final Project",
   "main": "src/main.js",
   "scripts": {
+    "start": "node src/main.js",
     "test": "jest -i"
   },
   "jest": {
@@ -17,6 +18,7 @@
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "joi": "^17.13.3",

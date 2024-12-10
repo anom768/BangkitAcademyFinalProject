@@ -37,7 +37,7 @@ const register = async (request) => {
     });
 }
 
-const login = async (request) => {
+const login = async (request, res) => {
     const loginRequest = validate(loginUserValidation, request);
 
     const user = await prismaClient.user.findUnique({
@@ -60,6 +60,7 @@ const login = async (request) => {
     }
 
     const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+
     return {
         token : token
     };
@@ -118,31 +119,17 @@ const update = async (request) => {
     })
 }
 
-const logout = async (username) => {
-    username = validate(getUserValidation, username);
+const logout = (req, res) => {
+    // Ambil token dari cookie
+    const token = req.get('Authorization')?.split(' ')[1];
 
-    const user = await prismaClient.user.findUnique({
-        where: {
-            username: username
-        }
-    });
-
-    if (!user) {
-        throw new ResponseError(404, "user is not found");
+    if (!token) {
+        return res.status(401).json({ errors: 'No token provided' });
     }
 
-    return prismaClient.user.update({
-        where: {
-            username: username
-        },
-        data: {
-            token: null
-        },
-        select: {
-            username: true
-        }
-    })
-}
+    // Set token kedaluwarsa segera
+    jwt.sign({}, process.env.SECRET_KEY, { expiresIn: -1 });
+};
 
 export default {
     register,
