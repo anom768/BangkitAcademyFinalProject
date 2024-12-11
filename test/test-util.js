@@ -49,4 +49,16 @@ export const truncateQuizTest = async () => {
     await prismaClient.quiz.deleteMany();
 };
 
+export const createGenerativeTest = async () => {
+    await prismaClient.generative.create({
+        data: {
+            username: "test",
+            image: "image-1.jpg",
+            prompt: "test prompt"
+        }
+    })
+}
 
+export const removeGenerativeTest = async () => {
+    await prismaClient.generative.deleteMany()
+}

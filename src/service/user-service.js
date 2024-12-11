@@ -8,13 +8,14 @@ import {
 import {prismaClient} from "../application/database.js";
 import {ResponseError} from "../error/response-error.js";
 import bcrypt from "bcrypt";
-import {v4 as uuid} from "uuid";
 import jwt from "jsonwebtoken";
+import {logger} from "../application/logging.js";
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
 const register = async (request) => {
     const user = validate(registerUserValidation, request);
+    logger.info("USER ==>", request.body);
 
     const countUser = await prismaClient.user.count({
         where: {
