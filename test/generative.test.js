@@ -19,6 +19,7 @@ describe("Run Generative API", function() {
     describe("POST /api/users/generate", function() {
 
         beforeEach(async () => {
+            await removeTestUser()
             await createTestUser();
         });
 
@@ -69,21 +70,21 @@ describe("Run Generative API", function() {
 
     describe("GET /api/users/histories", function () {
 
-        // beforeEach(async () => {
-        //     await createTestUser();
-        //     await createGenerativeTest();
-        //     await createGenerativeTest();
-        // })
+        beforeEach(async () => {
+            await createTestUser();
+            await createGenerativeTest();
+            await createGenerativeTest();
+        })
 
-        // afterEach(async() => {
-        //     await removeGenerativeTest();
-        //     await removeTestUser();
-        // })
+        afterEach(async() => {
+            await removeGenerativeTest();
+            await removeTestUser();
+        })
 
         it('should return all histories image', async () => {
             const result = await supertest(web)
                 .get("/api/users/histories")
-                // .set("Authorization", `Bearer ${token}`)
+                .set("Authorization", `Bearer ${token}`)
 
             logger.info(result);
             expect(result.status).toBe(200);
