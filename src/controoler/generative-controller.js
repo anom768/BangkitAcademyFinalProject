@@ -13,22 +13,18 @@ const generateImage = async (req, res, next) => {
     }
 }
 
-const getHistories = async (req, res, next) => {
-    logger.info("MASUK");
-    res.status(200).json({
-        data: "ARRAY"
-    });
-    // try {
-    //     const result = await generativeService.getHistories(req);
-    //     res.status(200).json({
-    //         data: result
-    //     });
-    // } catch (e) {
-    //     next(e);
-    // }
-}
+// const getHistories = async (req, res, next) => {
+//     try {
+//         const result = await generativeService.getHistories(req);
+//         res.status(200).json({
+//             data: result
+//         });
+//     } catch (e) {
+//         next(e);
+//     }
+// }
 
 export default {
     generateImage,
-    getHistories
+    // getHistories
 }

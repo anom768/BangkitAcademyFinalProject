@@ -24,15 +24,15 @@ const generateImage = async (req) => {
     })
 }
 
-const getHistories = async (req) => {
-    return prismaClient.generative.findMany({
-        where: {
-            username: req.user.username,
-        }
-    })
-}
+// const getHistories = async (req) => {
+//     return prismaClient.generative.findMany({
+//         where: {
+//             username: req.user.username,
+//         }
+//     })
+// }
 
 export default {
     generateImage,
-    getHistories
+    // getHistories
 }
